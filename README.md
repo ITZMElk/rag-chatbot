@@ -1,46 +1,54 @@
-# Domain-Specific RAG Chatbot
+# 🧠 Domain Knowledge Assistant — RAG Chatbot
 
-## Project overview
-This project is a portfolio-ready Retrieval-Augmented Generation (RAG) chatbot built in Python. It lets a user upload PDF documents, split them into meaningful chunks, store those chunks in a local vector database, and ask questions grounded in the uploaded content.
+A Retrieval-Augmented Generation (RAG) chatbot that answers questions strictly from your own PDF documents, with source citations and a visible confidence score for every answer.
 
-The design is intentionally educational: each step of the RAG pipeline is separated into its own module so it is easy to understand how retrieval and generation work together.
+Built to solve a real problem with LLM chatbots: **hallucination**. This system only answers when it can find relevant supporting text in your documents — and tells you honestly when it can't.
+
+![Python](https://img.shields.io/badge/Python-3.13-blue)
+![Streamlit](https://img.shields.io/badge/Streamlit-1.38-red)
+![ChromaDB](https://img.shields.io/badge/ChromaDB-vector%20store-green)
+![Gemini](https://img.shields.io/badge/Gemini-3.1--flash--lite-purple)
+
+---
+
+## Why this project
+
+Most "chat with your PDF" demos skip the hard part: knowing when *not* to answer. This project treats grounding as a first-class feature, not an afterthought — every response ships with a visible confidence score, and the system explicitly declines to answer rather than guess when retrieval quality is too low.
+
+## Features
+
+- 📄 **Multi-PDF ingestion** — upload and index multiple documents into a persistent local vector store
+- 🔍 **Semantic retrieval** — sentence-transformer embeddings + ChromaDB similarity search
+- 🤖 **Grounded generation** — Gemini answers using only retrieved context, with an explicit instruction not to fabricate
+- 📊 **Grounding confidence meter** — every answer shows a visual, color-coded confidence score (green/amber/red) based on the actual top similarity score
+- 📎 **Source citations** — every answer links back to the exact document, page, and chunk it came from, with an expandable preview
+- 🚫 **Honest fallback** — if no chunk clears the similarity threshold, the system says so instead of hallucinating an answer
 
 ## Architecture
+
 ```mermaid
 flowchart LR
-    A[PDF Uploads] --> B[Ingestion]
-    B --> C[Chunking]
-    C --> D[Embedding]
-    D --> E[ChromaDB Vector Store]
-    F[User Question] --> G[Query Embedding]
-    E --> H[Similarity Search]
-    G --> H
-    H --> I[Gemini Generation]
-    I --> J[Answer + Sources]
+    A[PDF Upload] --> B[Chunking<br/>500 tokens, 50 overlap]
+    B --> C[Embedding<br/>all-MiniLM-L6-v2]
+    C --> D[(ChromaDB<br/>Vector Store)]
+    
+    E[User Question] --> F[Query Embedding]
+    F --> D
+    D --> G{Similarity ≥<br/>threshold?}
+    G -->|No| H[Return: no relevant<br/>context found]
+    G -->|Yes| I[Top-k Retrieved Chunks]
+    I --> J[Gemini 3.1 Flash-Lite<br/>grounded generation]
+    J --> K[Answer + Sources +<br/>Confidence Score]
 ```
 
-## Setup instructions
-1. Create and activate a Python 3.11+ environment.
-2. Install the dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
-3. Copy the example environment file and add your Gemini API key:
-   ```bash
-   copy .env.example .env
-   ```
-4. Run the app:
-   ```bash
-   streamlit run app.py
-   ```
-
 ## How RAG works here
-1. Chunking: uploaded PDFs are split into smaller text chunks with overlap so the system can retrieve focused context rather than a whole document at once.
-2. Embedding: each chunk is converted into a numerical vector using a local sentence-transformer model.
-3. Retrieval: when the user asks a question, that question is embedded too and compared against stored chunks in ChromaDB to find the most relevant pieces.
-4. Generation: the retrieved chunks are passed to Gemini as context, and the model is instructed to answer only from that information.
 
-## Notes
-- The vector store is stored locally in the chroma_db folder.
-- Uploaded PDFs are saved in the data/uploads folder.
+1. **Ingestion** — PDFs are parsed page-by-page, split into ~500-token chunks with 50-token overlap (so context isn't lost at chunk boundaries), and embedded using a
+2.## Screenshots
+
+### Dashboard with stats and grounding-aware chat
+![Homepage](screenshots/homepage.png)
+
+### Grounded answer with source citations and confidence score
+![Chatbot](screenshots/chatbot.png)local sentence-transformer models folder.
 - The app uses a local embedding model, so it can run without paying for API-based embeddings.
