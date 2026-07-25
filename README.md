@@ -43,5 +43,12 @@ flowchart LR
 
 ## How RAG works here
 
-1. **Ingestion** — PDFs are parsed page-by-page, split into ~500-token chunks with 50-token overlap (so context isn't lost at chunk boundaries), and embedded using a local sentence-transformer models folder.
+1. **Ingestion** — PDFs are parsed page-by-page, split into ~500-token chunks with 50-token overlap (so context isn't lost at chunk boundaries), and embedded using a
+2.## Screenshots
+
+### Dashboard with stats and grounding-aware chat
+![Homepage](screenshots/homepage.png)
+
+### Grounded answer with source citations and confidence score
+![Chatbot](screenshots/chatbot.png)local sentence-transformer models folder.
 - The app uses a local embedding model, so it can run without paying for API-based embeddings.
