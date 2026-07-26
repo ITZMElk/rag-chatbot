@@ -125,329 +125,255 @@ st.markdown(
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
     :root {
-        --bg: #09090B;
-        --surface: #131722;
-        --surface-2: #171C2A;
-        --surface-3: #1A2130;
-        --accent: #6366F1;
-        --accent-2: #06B6D4;
-        --text: #F8FAFC;
-        --muted: #94A3B8;
-        --border: rgba(255,255,255,0.08);
-        --shadow: 0 12px 30px rgba(2, 6, 23, 0.25);
+        --bg: #09090b;
+        --surface: #111114;
+        --surface-2: #17171c;
+        --border: rgba(255, 255, 255, 0.08);
+        --text: #f5f5f6;
+        --muted: #8d94a3;
+        --accent: #6366f1;
+        --accent-soft: rgba(99, 102, 241, 0.16);
+    }
+    html, body, [data-testid="stAppViewContainer"], [data-testid="stApp"] {
+        background: var(--bg);
+        color: var(--text);
     }
     .stApp {
         background: var(--bg);
         color: var(--text);
     }
     .block-container {
-        padding-top: 1.2rem;
+        padding-top: 1rem;
         padding-bottom: 2rem;
-        max-width: 1400px;
+        max-width: 1180px;
     }
     .stSidebar {
-        background: linear-gradient(180deg, rgba(19, 23, 34, 0.98), rgba(9, 9, 11, 0.98));
+        background: var(--bg);
         border-right: 1px solid var(--border);
+        padding-top: 0.8rem;
     }
-    .hero-card {
-        background: linear-gradient(120deg, rgba(99, 102, 241, 0.18), rgba(6, 182, 212, 0.12));
+    .st-emotion-cache-1y4p8pa {
+        background: var(--bg);
+    }
+    .page-header {
+        margin-bottom: 1.2rem;
+        padding-top: 0.2rem;
+    }
+    .page-title {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--text);
+        letter-spacing: -0.01em;
+    }
+    .page-subtitle {
+        margin-top: 0.2rem;
+        font-size: 0.93rem;
+        color: var(--muted);
+        line-height: 1.5;
+    }
+    .sidebar-block {
         border: 1px solid var(--border);
-        border-radius: 20px;
-        padding: 1.25rem 1.35rem;
-        box-shadow: var(--shadow);
-        margin-bottom: 1.1rem;
+        border-radius: 14px;
+        padding: 0.8rem 0.9rem;
+        margin-bottom: 0.8rem;
+        background: var(--surface);
     }
-    .hero-title {
-        font-size: 2rem;
-        font-weight: 700;
-        letter-spacing: -0.02em;
+    .sidebar-title {
+        font-size: 0.98rem;
+        font-weight: 600;
+        color: var(--text);
+        margin-bottom: 0.2rem;
+    }
+    .sidebar-copy {
+        font-size: 0.86rem;
+        color: var(--muted);
+        line-height: 1.55;
+    }
+    .sidebar-section-title {
+        font-size: 0.8rem;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 0.55rem;
+    }
+    .doc-item {
+        display: flex;
+        align-items: center;
+        gap: 0.45rem;
+        padding: 0.4rem 0;
+        color: var(--text);
+        font-size: 0.92rem;
+    }
+    .doc-item .doc-check {
+        color: var(--accent);
+        flex-shrink: 0;
+    }
+    .empty-state {
+        min-height: 320px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        padding: 2rem;
+        color: var(--muted);
+        text-align: center;
+        background: var(--surface);
+    }
+    .empty-title {
+        font-size: 0.98rem;
+        font-weight: 600;
         color: var(--text);
         margin-bottom: 0.35rem;
     }
-    .hero-subtitle {
-        color: var(--muted);
-        font-size: 0.98rem;
-        line-height: 1.6;
-    }
-    .hero-description {
-        margin-top: 0.55rem;
-        color: #cbd5e1;
+    .empty-copy {
         font-size: 0.92rem;
-        line-height: 1.65;
-        max-width: 760px;
+        line-height: 1.6;
+        max-width: 520px;
     }
-    .badge-row {
+    .message-stack {
         display: flex;
-        gap: 0.5rem;
-        flex-wrap: wrap;
-        margin-bottom: 0.7rem;
+        flex-direction: column;
+        gap: 0.75rem;
+        margin-bottom: 1rem;
     }
-    .badge {
-        display: inline-flex;
-        align-items: center;
-        padding: 0.3rem 0.65rem;
-        border-radius: 999px;
-        border: 1px solid rgba(99, 102, 241, 0.3);
-        background: rgba(99, 102, 241, 0.12);
-        color: #dbe4ff;
-        font-size: 0.74rem;
-        font-weight: 600;
-        letter-spacing: 0.02em;
+    .message-row {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.6rem;
+        max-width: 860px;
     }
-    .stat-card {
-        background: var(--surface);
-        border: 1px solid var(--border);
-        border-radius: 16px;
-        padding: 0.9rem 1rem;
-        box-shadow: var(--shadow);
-        transition: transform 180ms ease, border-color 180ms ease;
-        min-height: 122px;
-        margin-bottom: 0.8rem;
+    .message-row.user {
+        margin-left: auto;
+        justify-content: flex-end;
     }
-    .stat-card:hover {
-        transform: translateY(-2px);
-        border-color: rgba(99, 102, 241, 0.35);
+    .message-row.assistant {
+        margin-right: auto;
     }
-    .stat-icon {
+    .message-avatar {
+        width: 1.8rem;
+        height: 1.8rem;
+        border-radius: 50%;
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        width: 2.1rem;
-        height: 2.1rem;
-        border-radius: 10px;
-        background: rgba(99, 102, 241, 0.16);
-        margin-bottom: 0.45rem;
-        color: var(--accent-2);
-    }
-    .stat-title {
-        font-size: 0.78rem;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        color: var(--muted);
-        margin-bottom: 0.2rem;
-    }
-    .stat-value {
-        font-size: 1.15rem;
-        font-weight: 700;
-        color: var(--text);
-        margin-bottom: 0.2rem;
-    }
-    .stat-meta {
-        font-size: 0.78rem;
-        color: var(--muted);
-        line-height: 1.45;
-    }
-    .sidebar-card {
-        background: var(--surface);
-        border: 1px solid var(--border);
-        border-radius: 16px;
-        padding: 0.85rem 0.95rem;
-        margin-bottom: 0.8rem;
-        box-shadow: var(--shadow);
-    }
-    .sidebar-intro {
         font-size: 0.9rem;
-        color: var(--muted);
-        line-height: 1.6;
-        margin-top: 0.3rem;
-    }
-    .upload-card {
-        background: linear-gradient(135deg, rgba(99, 102, 241, 0.12), rgba(6, 182, 212, 0.09));
-        border: 1px dashed rgba(99, 102, 241, 0.32);
-        border-radius: 16px;
-        padding: 0.9rem;
-        margin-bottom: 0.9rem;
-    }
-    .upload-title {
-        font-size: 0.95rem;
-        font-weight: 600;
+        flex-shrink: 0;
+        border: 1px solid var(--border);
+        background: var(--surface-2);
         color: var(--text);
-        margin-bottom: 0.25rem;
     }
-    .upload-copy {
-        font-size: 0.82rem;
-        color: var(--muted);
-        line-height: 1.5;
-        margin-bottom: 0.4rem;
-    }
-    .doc-card {
-        background: rgba(255,255,255,0.02);
+    .message-bubble {
         border: 1px solid var(--border);
         border-radius: 14px;
-        padding: 0.7rem 0.8rem;
-        margin-bottom: 0.55rem;
-        transition: border-color 180ms ease, transform 180ms ease;
-    }
-    .doc-card:hover {
-        border-color: rgba(99, 102, 241, 0.35);
-        transform: translateY(-1px);
-    }
-    .doc-top {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 0.5rem;
-    }
-    .doc-name {
-        font-weight: 600;
-        color: var(--text);
-        font-size: 0.9rem;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-    }
-    .doc-meta {
-        font-size: 0.76rem;
-        color: var(--muted);
-        display: flex;
-        gap: 0.4rem;
-        flex-wrap: wrap;
-        margin-top: 0.35rem;
-    }
-    .doc-pill {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.3rem;
-        padding: 0.24rem 0.5rem;
-        border-radius: 999px;
-        background: rgba(255,255,255,0.04);
-        border: 1px solid var(--border);
-    }
-    .doc-delete {
-        color: var(--muted);
-        font-size: 0.9rem;
-        cursor: default;
-    }
-    .empty-state {
-        background: var(--surface);
-        border: 1px solid var(--border);
-        border-radius: 18px;
-        padding: 1.4rem;
-        text-align: center;
-        box-shadow: var(--shadow);
-    }
-    .empty-emoji {
-        font-size: 2.2rem;
-        margin-bottom: 0.35rem;
-    }
-    .empty-title {
-        font-size: 1rem;
-        font-weight: 700;
-        margin-bottom: 0.3rem;
-        color: var(--text);
-    }
-    .empty-copy {
-        color: var(--muted);
-        font-size: 0.9rem;
-        line-height: 1.6;
-    }
-    .message-shell {
-        margin: 0.2rem 0 0.7rem 0;
-    }
-    .chat-bubble {
-        border-radius: 16px;
         padding: 0.8rem 0.95rem;
-        border: 1px solid var(--border);
-        box-shadow: var(--shadow);
-        line-height: 1.6;
+        line-height: 1.7;
         font-size: 0.95rem;
-        margin: 0.2rem 0 0.4rem 0;
+        color: var(--text);
+        background: transparent;
     }
-    .user-bubble {
-        background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(6, 182, 212, 0.1));
-        margin-left: 2rem;
-        border: 1px solid rgba(99, 102, 241, 0.24);
-    }
-    .assistant-bubble {
-        background: rgba(255,255,255,0.03);
-        margin-right: 2rem;
-        border-left: 3px solid rgba(99, 102, 241, 0.45);
+    .message-row.user .message-bubble {
+        background: var(--surface-2);
+        border-color: rgba(99, 102, 241, 0.18);
     }
     .message-meta {
         color: var(--muted);
-        font-size: 0.74rem;
-        margin-bottom: 0.35rem;
+        font-size: 0.76rem;
+        margin: 0 0 0.35rem 0;
     }
-    .typing-card {
+    .typing-pill {
         display: inline-flex;
         align-items: center;
-        gap: 0.7rem;
+        gap: 0.6rem;
         padding: 0.55rem 0.7rem;
         border-radius: 999px;
-        background: rgba(255,255,255,0.03);
+        background: var(--surface-2);
         border: 1px solid var(--border);
         color: var(--muted);
-        margin: 0.2rem 0 0.4rem 0;
+        font-size: 0.92rem;
+        margin-bottom: 0.4rem;
     }
     .typing-dots {
         display: inline-flex;
         gap: 0.25rem;
     }
     .typing-dots span {
-        width: 0.4rem;
-        height: 0.4rem;
+        width: 0.36rem;
+        height: 0.36rem;
         border-radius: 50%;
-        background: var(--accent-2);
-        animation: blink 1.2s infinite ease-in-out;
+        background: var(--accent);
+        animation: blink 1.1s infinite ease-in-out;
     }
-    .typing-dots span:nth-child(2) {
-        animation-delay: 0.15s;
-    }
-    .typing-dots span:nth-child(3) {
-        animation-delay: 0.3s;
-    }
+    .typing-dots span:nth-child(2) { animation-delay: 0.15s; }
+    .typing-dots span:nth-child(3) { animation-delay: 0.3s; }
     @keyframes blink {
         0%, 80%, 100% { transform: scale(0.8); opacity: 0.45; }
         40% { transform: scale(1); opacity: 1; }
     }
-    .citation-card {
-        border: 1px solid var(--border);
-        border-radius: 14px;
-        padding: 0.7rem 0.8rem;
-        background: rgba(255,255,255,0.025);
+    .source-group {
         margin-top: 0.5rem;
-        box-shadow: 0 8px 16px rgba(2, 6, 23, 0.14);
-    }
-    .citation-top {
         display: flex;
-        justify-content: space-between;
+        flex-direction: column;
+        gap: 0.35rem;
+    }
+    .source-item {
+        padding: 0.55rem 0.65rem;
+        border-radius: 10px;
+        background: var(--surface-2);
+        border: 1px solid var(--border);
+    }
+    .source-head {
+        display: flex;
         align-items: center;
+        justify-content: space-between;
         gap: 0.6rem;
-        margin-bottom: 0.35rem;
-    }
-    .citation-title {
-        font-weight: 600;
+        font-size: 0.84rem;
         color: var(--text);
-        font-size: 0.87rem;
     }
-    .citation-meta {
-        font-size: 0.76rem;
+    .source-meta {
+        color: var(--muted);
+        font-size: 0.8rem;
+    }
+    .source-preview {
+        margin-top: 0.3rem;
+        font-size: 0.82rem;
+        line-height: 1.5;
         color: var(--muted);
     }
-    .similarity-bar {
-        height: 0.36rem;
-        width: 100%;
+    .confidence-block {
+        margin-top: 0.5rem;
+        padding: 0.55rem 0.65rem;
+        border-radius: 10px;
+        background: var(--surface-2);
+        border: 1px solid var(--border);
+    }
+    .confidence-row {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        margin-top: 0.1rem;
+    }
+    .confidence-label {
+        color: var(--muted);
+        font-size: 0.8rem;
+        min-width: 72px;
+    }
+    .confidence-bar {
+        flex: 1;
+        height: 0.28rem;
         border-radius: 999px;
         background: rgba(255,255,255,0.08);
         overflow: hidden;
-        margin-top: 0.35rem;
     }
-    .similarity-fill {
+    .confidence-fill {
         height: 100%;
         border-radius: inherit;
     }
-    .citation-preview {
-        margin-top: 0.45rem;
-        color: var(--muted);
-        font-size: 0.82rem;
-        line-height: 1.55;
-    }
-    .citation-highlight {
-        display: inline-block;
-        padding: 0.1rem 0.3rem;
-        border-radius: 0.35rem;
-        background: rgba(99, 102, 241, 0.14);
-        color: #e2e8f0;
+    .confidence-value {
+        color: var(--text);
+        font-size: 0.8rem;
+        font-weight: 600;
     }
     .chat-input-shell {
         position: sticky;
@@ -456,30 +382,25 @@ st.markdown(
         padding-top: 0.6rem;
         z-index: 5;
     }
-    .stChatInput {
-        position: sticky;
-        bottom: 0;
-    }
     .stChatInput > div {
         border: 1px solid var(--border) !important;
         border-radius: 999px !important;
         background: var(--surface) !important;
-        box-shadow: var(--shadow);
+        box-shadow: none !important;
     }
     .stButton > button {
         border-radius: 999px;
         border: 1px solid var(--border);
-        background: linear-gradient(90deg, var(--accent), var(--accent-2));
+        background: var(--accent);
         color: white;
     }
     .stButton > button:hover {
-        border-color: rgba(255,255,255,0.15);
         opacity: 0.95;
     }
     .stFileUploader > div {
         border: 1px dashed rgba(99, 102, 241, 0.32) !important;
         border-radius: 14px !important;
-        background: rgba(99, 102, 241, 0.06) !important;
+        background: transparent !important;
     }
     </style>
     """,
@@ -491,70 +412,34 @@ if "messages" not in st.session_state:
 
 st.markdown(
     """
-    <div class="hero-card">
-        <div class="badge-row">
-            <span class="badge">🧠 RAG</span>
-            <span class="badge">✨ Gemini AI</span>
-            <span class="badge">🗂️ ChromaDB</span>
-            <span class="badge">📎 Source Citations</span>
-        </div>
-        <div class="hero-title">🧠 Domain Knowledge Assistant</div>
-        <div class="hero-subtitle">Chat with your PDFs using Retrieval-Augmented Generation.</div>
-        <div class="hero-description">Upload documents, search semantically, and receive grounded answers with page citations and confidence scores.</div>
+    <div class="page-header">
+        <div class="page-title">Domain Knowledge Assistant</div>
+        <div class="page-subtitle">Grounded answers from your uploaded documents.</div>
     </div>
     """,
     unsafe_allow_html=True,
 )
 
-stats = get_document_stats()
-question_count = len([message for message in st.session_state.messages if message.get("role") == "user"])
-average_similarity = _get_average_similarity(st.session_state.messages)
-last_response_time = _get_last_response_time(st.session_state.messages)
-embedding_model = EMBEDDING_MODEL_NAME
-
-stat_items = [
-    ("📄", "Documents", str(stats["document_count"]), "Indexed knowledge sources"),
-    ("🧩", "Chunks", str(stats["chunk_count"]), "Stored retrieval units"),
-    ("🧠", "Embedding Model", embedding_model, "Local semantic encoder"),
-    ("❓", "Questions Asked", str(question_count), "Prompts in the current session"),
-    ("📈", "Average Similarity", f"{average_similarity:.2f}" if average_similarity is not None else "—", "Across retrieved passages"),
-    ("⏱️", "Response Time", f"{last_response_time} ms" if last_response_time is not None else "—", "Last answer latency"),
-]
-stat_columns = st.columns(3)
-for index, (icon, title, value, subtitle) in enumerate(stat_items):
-    with stat_columns[index % 3]:
-        _render_stat_card(icon, title, value, subtitle)
-
 with st.sidebar:
     st.markdown(
         """
-        <div class="sidebar-card">
-            <div style="display:flex;align-items:center;gap:0.6rem;">
-                <div style="font-size:1.2rem;">🧠</div>
-                <div>
-                    <div style="font-weight:700;color:#F8FAFC;">Domain Knowledge Assistant</div>
-                    <div class="sidebar-intro">A lightweight AI knowledge base for your PDFs.</div>
-                </div>
-            </div>
+        <div class="sidebar-block">
+            <div class="sidebar-title">Domain Knowledge Assistant</div>
+            <div class="sidebar-copy">Ask questions about your documents.</div>
         </div>
         """,
         unsafe_allow_html=True,
     )
 
-    st.markdown(
-        "<div class='sidebar-card'><div class='upload-title'>Knowledge Base</div><div class='upload-copy'>Upload PDFs to build a searchable local knowledge base.</div></div>",
-        unsafe_allow_html=True,
-    )
-
-    st.markdown("<div class='upload-card'>", unsafe_allow_html=True)
+    st.markdown("<div class='sidebar-block'>", unsafe_allow_html=True)
     uploaded_files = st.file_uploader(
-        "Upload one or more PDFs",
+        "Upload PDFs",
         type=["pdf"],
         accept_multiple_files=True,
         label_visibility="collapsed",
     )
-    st.markdown("<div class='upload-copy'>PDFs are saved locally and indexed for retrieval.</div>", unsafe_allow_html=True)
-    if st.button("Ingest PDFs", use_container_width=True):
+    st.markdown("<div class='sidebar-copy'>PDFs are saved locally and indexed for retrieval.</div>", unsafe_allow_html=True)
+    if st.button("Upload PDFs", use_container_width=True):
         if not uploaded_files:
             st.warning("Please upload at least one PDF before ingesting.")
         else:
@@ -573,92 +458,81 @@ with st.sidebar:
                 st.info("Skipped already indexed files: " + ", ".join(result["skipped"]))
     st.markdown("</div>", unsafe_allow_html=True)
 
-    st.markdown("<div class='sidebar-card'><div class='upload-title'>Indexed documents</div></div>", unsafe_allow_html=True)
+    st.markdown("<div class='sidebar-block'>", unsafe_allow_html=True)
+    st.markdown("<div class='sidebar-section-title'>Library</div>", unsafe_allow_html=True)
     documents = _get_document_cards()
     if documents:
         for document in documents:
             st.markdown(
                 f"""
-                <div class="doc-card">
-                    <div class="doc-top">
-                        <div class="doc-name">{document['filename']}</div>
-                        <div class="doc-delete">✕</div>
-                    </div>
-                    <div class="doc-meta">
-                        <span class="doc-pill">📄 {document['pages']} pages</span>
-                        <span class="doc-pill">🧩 {document['chunks']} chunks</span>
-                        <span class="doc-pill">● {document['status']}</span>
-                    </div>
+                <div class="doc-item">
+                    <span class="doc-check">✓</span>
+                    <span>{document['filename']}</span>
                 </div>
                 """,
                 unsafe_allow_html=True,
             )
     else:
-        st.info("No documents have been indexed yet.")
-
-    stats = get_document_stats()
-    st.caption(f"Documents: {stats['document_count']} | Chunks: {stats['chunk_count']}")
+        st.caption("No documents have been indexed yet.")
+    st.markdown("</div>", unsafe_allow_html=True)
 
 if not st.session_state.messages:
     st.markdown(
         """
         <div class="empty-state">
-            <div class="empty-emoji">📚</div>
-            <div class="empty-title">Ready to explore your knowledge base.</div>
-            <div class="empty-copy">Upload one or more PDFs, ask questions in natural language, and receive grounded answers with citations.</div>
+            <div>
+                <div class="empty-title">Start by uploading a PDF.</div>
+                <div class="empty-copy">Ask a question in natural language and receive a grounded answer with source references.</div>
+            </div>
         </div>
         """,
         unsafe_allow_html=True,
     )
 
+st.markdown('<div class="message-stack">', unsafe_allow_html=True)
 for message in st.session_state.messages:
-    with st.chat_message(message.get("role", "assistant"), avatar="🤖" if message.get("role") == "assistant" else "🧑"):
-        if message.get("role") == "user":
-            if message.get("timestamp"):
-                st.markdown(f'<div class="message-meta">{message["timestamp"]}</div>', unsafe_allow_html=True)
-            st.markdown(
-                f'<div class="message-shell"><div class="chat-bubble user-bubble">{message["content"]}</div></div>',
-                unsafe_allow_html=True,
-            )
-        else:
-            if message.get("timestamp"):
-                st.markdown(f'<div class="message-meta">{message["timestamp"]}</div>', unsafe_allow_html=True)
-            st.markdown(
-                f'<div class="message-shell"><div class="chat-bubble assistant-bubble">{message["content"]}</div></div>',
-                unsafe_allow_html=True,
-            )
-            if message.get("sources"):
-                top_similarity = message["sources"][0].get("similarity", 0) if message.get("sources") else None
-                if top_similarity is not None:
-                    percentage = max(6, int(float(top_similarity) * 100))
-                    color = _similarity_color(top_similarity)
-                    st.markdown(
-                        f'<div class="citation-card"><div class="citation-top"><div class="citation-title">Grounding confidence</div><div class="citation-meta">{int(float(top_similarity) * 100)}%</div></div><div class="similarity-bar"><div class="similarity-fill" style="width:{percentage}%; background:{color};"></div></div></div>',
-                        unsafe_allow_html=True,
-                    )
-                for source in message["sources"]:
-                    preview = _format_preview(str(source.get("content", "")))
-                    similarity = source.get("similarity", 0)
-                    bar_color = _similarity_color(similarity)
-                    st.markdown(
-                        f"""
-                        <div class="citation-card">
-                            <div class="citation-top">
-                                <div class="citation-title">📄 {source.get('source', 'unknown')}</div>
-                                <div class="citation-meta">p{source.get('page', 'unknown')}</div>
+    role = message.get("role", "assistant")
+    is_user = role == "user"
+    avatar = "🧑" if is_user else "🤖"
+    bubble_class = "user" if is_user else "assistant"
+    with st.container():
+        if message.get("timestamp"):
+            st.markdown(f'<div class="message-meta">{message["timestamp"]}</div>', unsafe_allow_html=True)
+        st.markdown(
+            f'<div class="message-row {bubble_class}"><div class="message-avatar">{avatar}</div><div class="message-bubble">{message["content"]}</div></div>',
+            unsafe_allow_html=True,
+        )
+        if not is_user and message.get("sources"):
+            top_similarity = message["sources"][0].get("similarity", 0) if message.get("sources") else None
+            if top_similarity is not None:
+                percentage = max(6, int(float(top_similarity) * 100))
+                color = _similarity_color(top_similarity)
+                st.markdown(
+                    f'<div class="message-row assistant"><div class="message-avatar">✦</div><div class="source-group"><div class="confidence-block"><div class="source-head"><span>Confidence</span><span class="source-meta">{int(float(top_similarity) * 100)}%</span></div><div class="confidence-row"><div class="confidence-bar"><div class="confidence-fill" style="width:{percentage}%; background:{color};"></div></div><div class="confidence-value">{int(float(top_similarity) * 100)}%</div></div></div>',
+                    unsafe_allow_html=True,
+                )
+            for source in message["sources"]:
+                preview = _format_preview(str(source.get("content", "")))
+                st.markdown(
+                    f"""
+                    <div class="message-row assistant">
+                        <div class="message-avatar">📄</div>
+                        <div class="source-item">
+                            <div class="source-head">
+                                <span>{source.get('source', 'unknown')}</span>
+                                <span class="source-meta">p{source.get('page', 'unknown')}</span>
                             </div>
-                            <div class="citation-meta">Similarity {float(similarity) if similarity is not None else 0:.2f}</div>
-                            <div class="similarity-bar"><div class="similarity-fill" style="width:{max(8, int(float(similarity) * 100))}%; background:{bar_color};"></div></div>
-                            <details class="citation-preview">
-                                <summary>Preview</summary>
-                                <div class="citation-preview"><span class="citation-highlight">{preview}</span></div>
-                            </details>
+                            <div class="source-preview">{preview}</div>
                         </div>
-                        """,
-                        unsafe_allow_html=True,
-                    )
-            elif message.get("is_grounded") is False:
-                st.info("No relevant context was found, so the answer is not grounded in the uploaded documents.")
+                    </div>
+                    """,
+                    unsafe_allow_html=True,
+                )
+            if top_similarity is not None:
+                st.markdown("</div></div>", unsafe_allow_html=True)
+        elif not is_user and message.get("is_grounded") is False:
+            st.caption("No relevant context was found, so the answer is not grounded in the uploaded documents.")
+st.markdown('</div>', unsafe_allow_html=True)
 
 st.markdown('<div class="chat-input-shell">', unsafe_allow_html=True)
 prompt = st.chat_input("Ask anything about your uploaded documents...", key="rag_chat_input")
@@ -666,15 +540,15 @@ st.markdown('</div>', unsafe_allow_html=True)
 
 if prompt:
     st.session_state.messages.append({"role": "user", "content": prompt, "timestamp": datetime.now().strftime("%H:%M")})
-    with st.chat_message("user", avatar="🧑"):
+    with st.container():
         st.markdown(f'<div class="message-meta">{datetime.now().strftime("%H:%M")}</div>', unsafe_allow_html=True)
         st.markdown(
-            f'<div class="message-shell"><div class="chat-bubble user-bubble">{prompt}</div></div>',
+            f'<div class="message-row user"><div class="message-avatar">🧑</div><div class="message-bubble">{prompt}</div></div>',
             unsafe_allow_html=True,
         )
 
-    with st.chat_message("assistant", avatar="🤖"):
-        st.markdown('<div class="typing-card"><div class="typing-dots"><span></span><span></span><span></span></div><div>Searching vector database...</div></div>', unsafe_allow_html=True)
+    with st.container():
+        st.markdown('<div class="typing-pill"><div class="typing-dots"><span></span><span></span><span></span></div><div>Searching documents…</div></div>', unsafe_allow_html=True)
         start_time = time.perf_counter()
         with st.spinner("Retrieving relevant chunks..."):
             context_chunks = retrieve_context(prompt)
@@ -684,7 +558,7 @@ if prompt:
             is_grounded = False
             st.info("No relevant context was found, so the answer is not grounded in the uploaded documents.")
         else:
-            st.markdown('<div class="typing-card"><div class="typing-dots"><span></span><span></span><span></span></div><div>Generating grounded answer...</div></div>', unsafe_allow_html=True)
+            st.markdown('<div class="typing-pill"><div class="typing-dots"><span></span><span></span><span></span></div><div>Generating answer…</div></div>', unsafe_allow_html=True)
             with st.spinner("Generating grounded answer..."):
                 try:
                     response = generate_answer(prompt, context_chunks)
@@ -699,7 +573,7 @@ if prompt:
 
         response_time_ms = int((time.perf_counter() - start_time) * 1000)
         st.markdown(
-            f'<div class="message-shell"><div class="chat-bubble assistant-bubble">{answer}</div></div>',
+            f'<div class="message-row assistant"><div class="message-avatar">🤖</div><div class="message-bubble">{answer}</div></div>',
             unsafe_allow_html=True,
         )
         if sources:
@@ -708,30 +582,28 @@ if prompt:
                 percentage = max(6, int(float(top_similarity) * 100))
                 color = _similarity_color(top_similarity)
                 st.markdown(
-                    f'<div class="citation-card"><div class="citation-top"><div class="citation-title">Grounding confidence</div><div class="citation-meta">{int(float(top_similarity) * 100)}%</div></div><div class="similarity-bar"><div class="similarity-fill" style="width:{percentage}%; background:{color};"></div></div></div>',
+                    f'<div class="message-row assistant"><div class="message-avatar">✦</div><div class="source-group"><div class="confidence-block"><div class="source-head"><span>Confidence</span><span class="source-meta">{int(float(top_similarity) * 100)}%</span></div><div class="confidence-row"><div class="confidence-bar"><div class="confidence-fill" style="width:{percentage}%; background:{color};"></div></div><div class="confidence-value">{int(float(top_similarity) * 100)}%</div></div></div>',
                     unsafe_allow_html=True,
                 )
             for source in sources:
                 preview = _format_preview(str(source.get("content", "")))
-                similarity = source.get("similarity", 0)
-                bar_color = _similarity_color(similarity)
                 st.markdown(
                     f"""
-                    <div class="citation-card">
-                        <div class="citation-top">
-                            <div class="citation-title">📄 {source.get('source', 'unknown')}</div>
-                            <div class="citation-meta">p{source.get('page', 'unknown')}</div>
+                    <div class="message-row assistant">
+                        <div class="message-avatar">📄</div>
+                        <div class="source-item">
+                            <div class="source-head">
+                                <span>{source.get('source', 'unknown')}</span>
+                                <span class="source-meta">p{source.get('page', 'unknown')}</span>
+                            </div>
+                            <div class="source-preview">{preview}</div>
                         </div>
-                        <div class="citation-meta">Similarity {float(similarity) if similarity is not None else 0:.2f}</div>
-                        <div class="similarity-bar"><div class="similarity-fill" style="width:{max(8, int(float(similarity) * 100))}%; background:{bar_color};"></div></div>
-                        <details class="citation-preview">
-                            <summary>Preview</summary>
-                            <div class="citation-preview"><span class="citation-highlight">{preview}</span></div>
-                        </details>
                     </div>
                     """,
                     unsafe_allow_html=True,
                 )
+            if top_similarity is not None:
+                st.markdown("</div></div>", unsafe_allow_html=True)
         elif not is_grounded:
             st.caption("No sources were used because no relevant context was found.")
 
