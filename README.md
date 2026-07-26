@@ -9,7 +9,7 @@ Built to solve a real problem with LLM chatbots: **hallucination**. This system 
 ![ChromaDB](https://img.shields.io/badge/ChromaDB-vector%20store-green)
 ![Gemini](https://img.shields.io/badge/Gemini-3.1--flash--lite-purple)
 
----
+**[Live Demo](https://itzmelk-rag-chatbot-app-p9nqez.streamlit.app)**
 
 ## Why this project
 
